@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>Measurements</title>
+        <style type="text/css">
+            body {
+                line-height: 1.6em;
+            }
+            #minimaltable {
+                font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+                font-size: 12px;
+                background: #fff;
+                margin: 45px;
+                width: 500px;
+                border-collapse: collapse;
+                text-align: center;
+            }
+
+            #minimaltable th{
+                font-size: 14px;
+                font-weight: normal;
+                color: #039;
+                padding: 10px 8px;
+                border-bottom: 2px solid #6678b1;
+            }
+
+            #minimaltable td{
+                color: #669;
+                padding: 9px 8px 8px 8px;
+            }
+
+            #minimaltable tbody tr:hover td{
+                color: #009;
+            }
+        </style>
+    </head>
+
+    <body>
+    {% if measurements %}
+        <table id="minimaltable" summary="Live measurements" border="1">
+            <th scope="col">Location</th>
+            <th scope="col">Node</th>
+            <th scope="col">Lot Status</th>
+            <th scope="col">Raw reading</th>
+            <th scope="col">Created</th>
+            {% for measurement in measurements %}
+            <tr>
+                <td>{{ measurement.node.cluster }}</td>
+                <td>{{ measurement.node }}</td>
+                <td>{{ measurement.isTaken }}</td>
+                <td>{{ measurement.raw_reading }}</td>
+                <td>{{ measurement.created }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No measurements were found.</p>
+    {% endif %}
+    </body>
+</html>
