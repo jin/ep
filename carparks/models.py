@@ -39,3 +39,8 @@ class Measurement(models.Model):
 
     def __unicode__(self):
         return str(self.node)
+
+
+    
+    class Meta:
+        ordering = ['-created']

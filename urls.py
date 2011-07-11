@@ -16,5 +16,6 @@ urlpatterns += patterns('ep.views',
 ''' Easypark '''
 urlpatterns += patterns('ep.carparks.views',
         (r'^carparks/$', 'show_clusters'),
-        (r'^live/$', 'measurements')
+        (r'^live/$', 'measurements'),
+        (r'^add/$', 'add_record'),
         )
