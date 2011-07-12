@@ -11,5 +11,6 @@ urlpatterns = patterns('',
 # EP-related
 urlpatterns += patterns('ep.carparks.views',
         (r'^live/$', 'measurements'),
+        (r'^(?P<req_cluster>\d{1,2})/$', 'node_request'),
         (r'^(?P<req_cluster>\d{1,2})/(?P<req_node>\d{1,2})/$', 'node_request'),
         )

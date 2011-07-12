@@ -5,18 +5,23 @@ from django.views.decorators.csrf import csrf_exempt
 from xml.etree import ElementTree
 
 
-@csrf_exempt
 def measurements(request, template_name='measurements.html'):
     measurements = Measurement.objects.all()[:10]
     return render_to_response(template_name, {'measurements': measurements})
 
 
 @csrf_exempt
-def node_request(request, req_cluster, req_node):
-    try:
-        req_cluster, req_node, = int(req_cluster), int(req_node)
-    except ValueError:
-        raise Http404()
+def node_request(request, req_cluster, req_node=None):
+    if req_node == None:
+        try:
+            req_cluster = int(req_cluster)
+        except ValueError:
+            raise Http404()
+    else:
+        try:
+            req_cluster, req_node, = int(req_cluster), int(req_node)
+        except ValueError:
+            raise Http404()
 
     if request.method == 'POST':
         tree = ElementTree.fromstring(request.raw_post_data)
@@ -28,7 +33,17 @@ def node_request(request, req_cluster, req_node):
         return HttpResponse('OK\n')
 
     elif request.method == 'GET':
-        measurements = Measurement.objects.filter(node = req_node)
+        if req_node != None:
+            selected_node = Node.objects.filter(cluster = req_cluster).get(node = req_node)
+            measurements = Measurement.objects.filter(node = selected_node.id)
+        else:
+            selected_nodes = Node.objects.filter(cluster = req_cluster)
+            print type(selected_nodes)
+            nodes = []
+            for node in selected_nodes:
+                nodes.append(node.id)
+            measurements = Measurement.objects.filter(node__in=nodes)
+
         return render_to_response('measurements.html', {'measurements': measurements})
 
     else:
