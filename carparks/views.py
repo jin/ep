@@ -12,17 +12,6 @@ def measurements(request, template_name='measurements.html'):
 
 
 @csrf_exempt
-def record(request, req_cluster, req_node, req_reading):
-    try:
-        req_cluster, req_node, req_reading = int(req_cluster), int(req_node), int(req_reading)
-    except ValueError:
-        raise Http404()
-    record = Measurement(node = Node.objects.get(cluster = req_cluster, node = req_node), raw_reading = req_reading)
-    record.save()
-    return HttpResponse('OK')
-
-
-@csrf_exempt
 def node_request(request, req_cluster, req_node):
     try:
         req_cluster, req_node, = int(req_cluster), int(req_node)
@@ -34,8 +23,8 @@ def node_request(request, req_cluster, req_node):
         for element in tree.getiterator():
             if element.tag == 'reading':
                 req_reading = int(element.text)
-        record = Measurement(node = Node.objects.get(cluster = req_cluster, node = req_node), raw_reading = req_reading)
-        record.save()
+        entry = Measurement(node = Node.objects.get(cluster = req_cluster, node = req_node), raw_reading = req_reading)
+        entry.save()
         return HttpResponse('OK\n')
 
     elif request.method == 'GET':
