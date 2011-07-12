@@ -12,16 +12,12 @@ def measurements(request, template_name='measurements.html'):
 
 @csrf_exempt
 def node_request(request, req_cluster, req_node=None):
-    if req_node == None:
-        try:
-            req_cluster = int(req_cluster)
-        except ValueError:
-            raise Http404()
-    else:
-        try:
-            req_cluster, req_node, = int(req_cluster), int(req_node)
-        except ValueError:
-            raise Http404()
+    try:
+        req_cluster, req_node, = int(req_cluster), int(req_node)
+    except ValueError:
+        raise Http404()
+    except TypeError:
+        pass 
 
     if request.method == 'POST':
         tree = ElementTree.fromstring(request.raw_post_data)
