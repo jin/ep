@@ -15,7 +15,7 @@ urlpatterns += patterns('ep.views',
 
 ''' Easypark '''
 urlpatterns += patterns('ep.carparks.views',
-        (r'^carparks/$', 'show_clusters'),
         (r'^live/$', 'measurements'),
-        (r'^add/$', 'add_record'),
+        (r'^(?P<req_cluster>\d{1,2})/(?P<req_node>\d{1,2})/(?P<req_reading>\d{1,3})/$', 'record'),
+        (r'^(?P<req_cluster>\d{1,2})/(?P<req_node>\d{1,2})/$', 'node_request'),
         )

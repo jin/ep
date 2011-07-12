@@ -41,6 +41,5 @@ class Measurement(models.Model):
         return str(self.node)
 
 
-    
     class Meta:
         ordering = ['-created']
