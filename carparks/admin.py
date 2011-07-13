@@ -15,7 +15,7 @@ class NodeAdmin(admin.ModelAdmin):
 
 
 class MeasurementAdmin(admin.ModelAdmin):
-    list_display = ('node', 'raw_reading', 'created')
+    list_display = ('node', 'raw_reading', 'batt', 'created')
     ordering = ('-created',)
 
 

@@ -24,7 +24,9 @@ def node_request(request, req_cluster, req_node=None):
         for element in tree.getiterator():
             if element.tag == 'reading':
                 req_reading = int(element.text)
-        entry = Measurement(node = Node.objects.get(cluster = req_cluster, node = req_node), raw_reading = req_reading)
+            if element.tag == 'batt':
+                req_batt = int(element.text)
+        entry = Measurement(node = Node.objects.get(cluster = req_cluster, node = req_node), raw_reading = req_reading, batt = req_batt)
         entry.save()
         return HttpResponse('OK\n')
 

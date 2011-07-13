@@ -1,11 +1,11 @@
 #!/usr/bin/python2.7
 # Requires python2.7+
 # Module(s): pyserial
-
 # Select USB port to read from
 TTY = "/dev/ttyUSB0"
 
 import sys
+
 if sys.version_info[:2] < (2, 7):
     print "Error: Use Python 2.7 or greater"
     sys.exit()
@@ -25,7 +25,7 @@ def process_data(data):
     d["Batt"] = int(elements[2])
     d["Reading"] = int(elements[3])
     
-    curl_post = '''curl -H "Content-Type: text/xml" -d "<?xml version='1.0' encoding='utf-8'?><node><reading>%d</reading></node>" http://localhost:8000/live/1/%d/''' % (d["Reading"], d["Node"])
+    curl_post = '''curl -H "Content-Type: text/xml" -d "<?xml version='1.0' encoding='utf-8'?><node><reading>%d</reading><batt>%d</batt></node>" http://localhost:8000/live/1/%d/''' % (d["Reading"], d["Batt"], d["Node"])
     return curl_post 
 
 
@@ -49,7 +49,6 @@ def main():
             data = s.readline()
             args = shlex.split(process_data(data))
             subprocess.Popen(args)
-
         except:
             break
 
