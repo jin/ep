@@ -5,9 +5,9 @@ from django.views.decorators.csrf import csrf_exempt
 from xml.etree import ElementTree
 
 
-def measurements(request, template_name='measurements.html'):
+def measurements(request):
     measurements = Measurement.objects.all()[:10]
-    return render_to_response(template_name, {'measurements': measurements})
+    return render_to_response('measurements.html', {'measurements': measurements})
 
 
 @csrf_exempt
@@ -31,14 +31,13 @@ def node_request(request, req_cluster, req_node=None):
     elif request.method == 'GET':
         if req_node != None:
             selected_node = Node.objects.filter(cluster = req_cluster).get(node = req_node)
-            measurements = Measurement.objects.filter(node = selected_node.id)
+            measurements = Measurement.objects.filter(node = selected_node.id)[:10]
         else:
             selected_nodes = Node.objects.filter(cluster = req_cluster)
-            print type(selected_nodes)
             nodes = []
             for node in selected_nodes:
                 nodes.append(node.id)
-            measurements = Measurement.objects.filter(node__in=nodes)
+            measurements = Measurement.objects.filter(node__in=nodes)[:10]
 
         return render_to_response('measurements.html', {'measurements': measurements})
 
