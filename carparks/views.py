@@ -45,3 +45,19 @@ def node_request(request, req_cluster, req_node=None):
 
     else:
         raise Http404()
+
+
+def mobile_ui_main(request):
+    return HttpResponse("Main UI here")
+
+
+def mobile_ui_cluster_overview(request, req_cluster = None):
+    if req_cluster == None:
+        raise Http404()
+    else:
+        try:
+            req_cluster = int(req_cluster)
+        except TypeError:
+            raise Http404()
+
+    return HttpResponse("Cluster %d overview here" % req_cluster)

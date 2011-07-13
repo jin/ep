@@ -10,7 +10,7 @@
                 font-size: 12px;
                 background: #fff;
                 margin: 45px;
-                width: 500px;
+                width: 550px;
                 border-collapse: collapse;
                 text-align: center;
             }
@@ -41,6 +41,7 @@
             <th scope="col">Node</th>
             <th scope="col">Lot Status</th>
             <th scope="col">Raw reading</th>
+            <th scope="col">Battery %</th>
             <th scope="col">Created</th>
             {% for measurement in measurements %}
             <tr>
@@ -48,6 +49,7 @@
                 <td>{{ measurement.node }}</td>
                 <td>{{ measurement.isTaken }}</td>
                 <td>{{ measurement.raw_reading }}</td>
+                <td>{{ measurement.batt }}</td>
                 <td>{{ measurement.created }}</td>
             </tr>
             {% endfor %}
