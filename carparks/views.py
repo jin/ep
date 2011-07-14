@@ -40,7 +40,6 @@ def node_request(request, req_cluster, req_node=None):
             for node in selected_nodes:
                 nodes.append(node.id)
             measurements = Measurement.objects.filter(node__in=nodes)[:10]
-
         return render_to_response('measurements.html', {'measurements': measurements})
 
     else:

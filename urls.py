@@ -20,5 +20,5 @@ urlpatterns += patterns('ep.carparks.views',
 
 # EP API version 1.0
 urlpatterns += patterns('ep.apiv1.views',
-        (r'^api/v1/xml/(?P<req_cluster>\d{1,2})/$', 'xml_response'),
+        (r'^api/v1/xml/clusters', 'xml_response'),
         )
