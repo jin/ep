@@ -30,12 +30,12 @@ def process_data(data):
 
 
 def main():
-    #try:
-        #subprocess.call(["stty", "-F", TTY, "38400"])
-        #print subprocess.check_output(["stty", "-F", TTY])
-    #except subprocess.CalledProcessError:
-        #print "Error: Cannot configure " + TTY + ", please check your selected device."
-        #sys.exit()
+    try:
+        subprocess.call(["stty", "-F", TTY, "38400"])
+        print subprocess.check_output(["stty", "-F", TTY])
+    except subprocess.CalledProcessError:
+        print "Error: Cannot configure " + TTY + ", please check your selected device."
+        sys.exit()
     
     try:
         s = serial.Serial(TTY, 38400)

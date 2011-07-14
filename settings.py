@@ -84,6 +84,7 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     'ep.carparks',
+    'ep.apiv1',
     'django_evolution',
     'django.contrib.auth',
     'django.contrib.contenttypes',
