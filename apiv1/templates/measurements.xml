@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<measurements version="1.0">
+    {% for measurement in measurements %}
+    <node>
+        <cluster>{{ measurement.node.cluster }}</cluster>
+        <id>{{ measurement.node }}</id>
+        <occupancy>{{ measurement.isTaken }}</occupancy>
+        <reading>{{ measurement.raw_reading }}</reading>
+        <batt>{{ measurement.batt }}</batt>
+        <created>{{ measurement.created }}</created>
+    </node>
+    {% endfor %}
+</measurements>

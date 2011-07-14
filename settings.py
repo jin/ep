@@ -80,6 +80,7 @@ ROOT_URLCONF = 'ep.urls'
 TEMPLATE_DIRS = (
         "/home/jin/Codes/Django/ep/templates/",
         "/home/jin/Codes/Django/ep/carparks/templates/",
+        "/home/jin/Codes/Django/ep/apiv1/templates/",
 )
 
 INSTALLED_APPS = (
