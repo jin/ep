@@ -18,23 +18,21 @@ def xml_response(request):
         except:
             req_node = None
 
-        if req_node is None:
-            selected_nodes = Node.objects.filter(cluster = req_cluster)
-            nodes = []
-
-            for node in selected_nodes:
-                nodes.append(node.id)
-
-            if latest:
-                measurements = Measurement.objects.filter(node__in=nodes)[:latest]
-            else:
-                measurements = Measurement.objects.filter(node__in=nodes)
-
-        else:
+        if req_node: 
             selected_node = Node.objects.filter(cluster = req_cluster).get(node = req_node)
             if latest:
                 measurements = Measurement.objects.filter(node = selected_node.id)[:latest]
             else:
                 measurements = Measurement.objects.filter(node = selected_node.id)
+
+        else:
+            selected_nodes = Node.objects.filter(cluster = req_cluster)
+            nodes = []
+            for node in selected_nodes:
+                nodes.append(node.id)
+            if latest:
+                measurements = Measurement.objects.filter(node__in=nodes)[:latest]
+            else:
+                measurements = Measurement.objects.filter(node__in=nodes)
 
         return render_to_response('measurements.xml', {'measurements': measurements})
