@@ -1,5 +1,4 @@
 from django.shortcuts import render_to_response
-from django.http import Http404, HttpResponse, HttpResponseRedirect
 from ep.carparks.models import *
 
 
@@ -26,14 +25,14 @@ def xml_response(request):
             for node in selected_nodes:
                 nodes.append(node.id)
 
-            if latest is not None:
+            if latest:
                 measurements = Measurement.objects.filter(node__in=nodes)[:latest]
             else:
                 measurements = Measurement.objects.filter(node__in=nodes)
 
         else:
             selected_node = Node.objects.filter(cluster = req_cluster).get(node = req_node)
-            if latest is not None:
+            if latest:
                 measurements = Measurement.objects.filter(node = selected_node.id)[:latest]
             else:
                 measurements = Measurement.objects.filter(node = selected_node.id)
