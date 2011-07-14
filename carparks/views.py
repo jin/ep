@@ -26,7 +26,9 @@ def node_request(request, req_cluster, req_node=None):
                 req_reading = int(element.text)
             if element.tag == 'batt':
                 req_batt = int(element.text)
-        entry = Measurement(node = Node.objects.get(cluster = req_cluster, node = req_node), raw_reading = req_reading, batt = req_batt)
+            if element.tag == 'seq':
+                req_seq = int(element.text)
+        entry = Measurement(node = Node.objects.get(cluster = req_cluster, node = req_node), raw_reading = req_reading, batt = req_batt, seq = req_seq)
         entry.save()
         return HttpResponse('OK\n')
 

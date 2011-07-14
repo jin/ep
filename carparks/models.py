@@ -27,6 +27,7 @@ class Measurement(models.Model):
     raw_reading = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
     batt = models.IntegerField()
+    seq = models.IntegerField()
     
 
     def isTaken(self):

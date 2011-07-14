@@ -42,6 +42,7 @@
             <th scope="col">Lot status</th>
             <th scope="col">Raw reading</th>
             <th scope="col">Battery %</th>
+            <th scope="col">Sequence no.</th>
             <th scope="col">Created</th>
             {% for measurement in measurements %}
             <tr>
@@ -50,6 +51,7 @@
                 <td>{{ measurement.isTaken }}</td>
                 <td>{{ measurement.raw_reading }}</td>
                 <td>{{ measurement.batt }}</td>
+                <td>{{ measurement.seq }}</td>
                 <td>{{ measurement.created }}</td>
             </tr>
             {% endfor %}

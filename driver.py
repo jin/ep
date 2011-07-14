@@ -25,7 +25,7 @@ def process_data(data):
     d["Batt"] = int(elements[2])
     d["Reading"] = int(elements[3])
     
-    curl_post = '''curl -H "Content-Type: text/xml" -d "<?xml version='1.0' encoding='utf-8'?><node><reading>%d</reading><batt>%d</batt></node>" http://localhost:8000/live/1/%d/''' % (d["Reading"], d["Batt"], d["Node"])
+    curl_post = '''curl -H "Content-Type: text/xml" -d "<?xml version='1.0' encoding='utf-8'?><node><reading>%d</reading><batt>%d</batt><seq>%d</seq></node>" http://localhost:8000/live/1/%d/''' % (d["Reading"], d["Batt"], d["Seq"], d["Node"])
     return curl_post 
 
 
