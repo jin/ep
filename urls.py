@@ -18,13 +18,13 @@ urlpatterns += patterns('ep.carparks.views',
         )
 
 
-# EP API version 1.0
-urlpatterns += patterns('ep.apiv1.views',
-        (r'^api/v1/xml/clusters', 'xml_response'),
+# EP API 
+urlpatterns += patterns('ep.api.views',
+        (r'^api/xml/clusters', 'xml_response'),
         )
 
 
 # EP API version 1.0 (django-piston getting started)
 urlpatterns += patterns('',
-        (r'^api/', include('ep.apiv1.urls')),
+        (r'^api/', include('ep.api.urls')),
         )
