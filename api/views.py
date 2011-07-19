@@ -36,3 +36,6 @@ def xml_response(request):
                 measurements = Measurement.objects.filter(node__in=nodes)
 
         return render_to_response('measurements.xml', {'measurements': measurements})
+
+    elif request.method == 'POST':
+        pass
