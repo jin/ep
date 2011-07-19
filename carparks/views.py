@@ -9,7 +9,6 @@ def measurements(request):
     return render_to_response('measurements.html', {'measurements': measurements})
 
 
-@csrf_exempt
 def show_data(request, req_cluster, req_node=None):
     try:
         req_cluster, req_node, = int(req_cluster), int(req_node)
