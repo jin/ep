@@ -1,7 +1,6 @@
 from django.shortcuts import render_to_response
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from ep.carparks.models import *
-from django.views.decorators.csrf import csrf_exempt
 
 
 def show_data(request, req_cluster = None, req_node = None):
@@ -13,15 +12,15 @@ def show_data(request, req_cluster = None, req_node = None):
         pass 
 
     if request.method == 'GET':
-        if req_cluster: 
+        if req_node and req_cluster:
+            selected_node = Node.objects.filter(cluster = req_cluster).get(node = req_node)
+            measurements = Measurement.objects.filter(node = selected_node.id)[:10]
+        elif req_cluster: 
             selected_nodes = Node.objects.filter(cluster = req_cluster)
             nodes = []
             for node in selected_nodes:
                 nodes.append(node.id)
             measurements = Measurement.objects.filter(node__in=nodes)[:10]
-        elif req_node and req_cluster:
-            selected_node = Node.objects.filter(cluster = req_cluster).get(node = req_node)
-            measurements = Measurement.objects.filter(node = selected_node.id)[:10]
         else:
             measurements = Measurement.objects.all()[:25]
         return render_to_response('measurements.html', {'measurements': measurements})
