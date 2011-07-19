@@ -1,7 +1,12 @@
 from django.shortcuts import render_to_response
 from ep.carparks.models import *
+from xml.etree import ElementTree
+from django.views.decorators.csrf import csrf_exempt
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 
 
+
+@csrf_exempt
 def xml_response(request):
     if request.method == 'GET':
         req_cluster = int(request.GET["cluster_id"])
@@ -38,4 +43,20 @@ def xml_response(request):
         return render_to_response('measurements.xml', {'measurements': measurements})
 
     elif request.method == 'POST':
-        pass
+        tree = ElementTree.fromstring(request.raw_post_data)
+        for element in tree.getiterator():
+            if element.tag == 'reading':
+                req_reading = int(element.text)
+            if element.tag == 'batt':
+                req_batt = int(element.text)
+            if element.tag == 'seq':
+                req_seq = int(element.text)
+            if element.tag == 'node':
+                req_node = int(element.text)
+            if element.tag == 'cluster':
+                req_cluster = int(element.text)
+
+        entry = Measurement(node = Node.objects.get(cluster = req_cluster, node = req_node), raw_reading = req_reading, batt = req_batt, seq = req_seq)
+        entry.save()
+
+        return HttpResponse('OKAY\n')

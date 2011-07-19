@@ -24,8 +24,10 @@ def process_data(data):
     d["Seq"] = int(elements[1])
     d["Batt"] = int(elements[2])
     d["Reading"] = int(elements[3])
+    d["Cluster"] = 1
     
-    curl_post = '''curl -H "Content-Type: text/xml" -d "<?xml version='1.0' encoding='utf-8'?><node><reading>%d</reading><batt>%d</batt><seq>%d</seq></node>" http://localhost:8000/live/1/%d/''' % (d["Reading"], d["Batt"], d["Seq"], d["Node"])
+    #curl_post = '''curl -H "Content-Type: text/xml" -d "<?xml version='1.0' encoding='utf-8'?><node><reading>%d</reading><batt>%d</batt><seq>%d</seq></node>" http://192.168.1.4:8000/live/1/%d/''' % (d["Reading"], d["Batt"], d["Seq"], d["Node"])
+    curl_post = '''curl -H "Content-Type: text/xml" -d "<?xml version='1.0' encoding='utf-8'?><data><reading>%d</reading><batt>%d</batt><seq>%d</seq><cluster>%d</cluster><node>%d</node></data>" http://192.168.1.4:8000/api/xml/clusters''' % (d["Reading"], d["Batt"], d["Seq"], d["Cluster"], d["Node"])
     return curl_post 
 
 
