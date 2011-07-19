@@ -3,7 +3,7 @@ from django.conf.urls.defaults import *
 
 # Using views.py for API
 urlpatterns = patterns('ep.api.views',
-        (r'xml/clusters', 'xml_response'),
+        (r'xml/clusters', 'process_xml'),
         )
 
 # Using handlers.py for API for django-piston

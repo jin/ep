@@ -7,7 +7,7 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 
 
 @csrf_exempt
-def xml_response(request):
+def process_xml(request):
     if request.method == 'GET':
         req_cluster = int(request.GET["cluster_id"])
 
