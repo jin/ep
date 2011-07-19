@@ -2,11 +2,10 @@ from django.shortcuts import render_to_response
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from ep.carparks.models import *
 from django.views.decorators.csrf import csrf_exempt
-from xml.etree import ElementTree
 
 
 def measurements(request):
-    measurements = Measurement.objects.all()[:10]
+    measurements = Measurement.objects.all()[:25]
     return render_to_response('measurements.html', {'measurements': measurements})
 
 
