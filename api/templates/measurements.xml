@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <measurements version="1.0">
     {% for measurement in measurements %}
-    <node>
+    <data>
         <cluster_name>{{ measurement.node.cluster }}</cluster_name>
         <cluster_id>{{ measurement.node.cluster.id }}</cluster_id>
         <node_id>{{ measurement.node }}</node_id>
@@ -10,6 +10,6 @@
         <batt>{{ measurement.batt }}</batt>
         <seq>{{ measurement.seq }}</seq>
         <created>{{ measurement.created }}</created>
-    </node>
+    </data>
     {% endfor %}
 </measurements>
