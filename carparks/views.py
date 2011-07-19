@@ -11,7 +11,7 @@ def measurements(request):
 
 
 @csrf_exempt
-def node_request(request, req_cluster, req_node=None):
+def show_data(request, req_cluster, req_node=None):
     try:
         req_cluster, req_node, = int(req_cluster), int(req_node)
     except ValueError:
@@ -19,20 +19,7 @@ def node_request(request, req_cluster, req_node=None):
     except TypeError:
         pass 
 
-    if request.method == 'POST':
-        tree = ElementTree.fromstring(request.raw_post_data)
-        for element in tree.getiterator():
-            if element.tag == 'reading':
-                req_reading = int(element.text)
-            if element.tag == 'batt':
-                req_batt = int(element.text)
-            if element.tag == 'seq':
-                req_seq = int(element.text)
-        entry = Measurement(node = Node.objects.get(cluster = req_cluster, node = req_node), raw_reading = req_reading, batt = req_batt, seq = req_seq)
-        entry.save()
-        return HttpResponse('OK\n')
-
-    elif request.method == 'GET':
+    if request.method == 'GET':
         if req_node != None:
             selected_node = Node.objects.filter(cluster = req_cluster).get(node = req_node)
             measurements = Measurement.objects.filter(node = selected_node.id)[:10]
