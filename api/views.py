@@ -31,7 +31,7 @@ def process_xml(request):
             else:
                 measurements = Measurement.objects.filter(node = selected_node.id)
 
-        elif req_node and latest and req_cluster == None:
+        elif req_node and latest and not req_cluster:
             return HttpResponse("Please specify the cluster_id.")
 
         elif req_cluster:
