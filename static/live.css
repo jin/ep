@@ -6,8 +6,8 @@ body {
 #minimaltable{
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     font-size: 12px;
-    margin: 5px;
-    width: 550px;
+    margin: 0px;
+    width: 100%;
     border-collapse: collapse;
     text-align: center;
 }
