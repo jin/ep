@@ -2,13 +2,21 @@
 <html lang="en">
     <head>
         <title>{% block title %}{% endblock %}</title>
+
         <!-- Page specific js/css start -->
         {% block page-scripts %}{% endblock %}
         {% block page-css %}{% endblock %}
         <!-- Page specific js/css end -->
+
         <!-- Site-wide js/css start -->
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
         <!-- Site-wide js/css end -->
+
+        <!-- Site-wide meta start -->
+
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no" />
+        <!-- Site-wide meta end -->
     </head>
     <body>
         {% block content %}{% endblock %}
