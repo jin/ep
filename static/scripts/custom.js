@@ -1,8 +1,8 @@
-var refreshNotification = 
-    function(){
-        $('#live_data').load('/live');
-    };
-
 jQuery(document).ready(function(){
-    var autoRefresh = setTimeout(refreshNotification, 2000);
+    var pathname = window.location.pathname;
+    var refreshNotification = 
+        function(){
+            $('#live_data').load(pathname);
+        };
+    setTimeout(refreshNotification, 3000);
 });
