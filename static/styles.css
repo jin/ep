@@ -1,0 +1,29 @@
+body {
+    line-height: 1.6em;
+}
+#minimaltable {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 12px;
+    background: #fff;
+    margin: 45px;
+    width: 550px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+#minimaltable th{
+    font-size: 14px;
+    font-weight: normal;
+    color: #039;
+    padding: 10px 8px;
+    border-bottom: 2px solid #6678b1;
+}
+
+#minimaltable td{
+    color: #669;
+    padding: 9px 8px 8px 8px;
+}
+
+#minimaltable tbody tr:hover td{
+    color: #009;
+}
