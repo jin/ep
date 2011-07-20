@@ -1,70 +1,42 @@
-<html>
-    <head>
-        <title>Measurements</title>
-        <link rel="stylesheet" type="text/css" href="/static/styles.css" />
-        <script>
-            <!--
+{% extends "base.html" %}
 
-            /*
-            Auto Refresh Page with Time script
-            By JavaScript Kit (javascriptkit.com)
-            Over 200+ free scripts here!
-            */
+{% block title %}
+        Measurements
+{% endblock %}
 
-            //enter refresh time in "minutes:seconds" Minutes should range from 0 to inifinity. Seconds should range from 0 to 59
-            var limit="0:02"
+{% block page-scripts %}
+        <script type="text/javascript" src="/static/scripts/custom.js"></script>
+{% endblock %}
 
-            if (document.images){
-                var parselimit=limit.split(":")
-                parselimit=parselimit[0]*60+parselimit[1]*1
-            }
-            function beginrefresh(){
-                if (!document.images)
-                return
-                if (parselimit==1)
-                window.location.reload()
-                else{ 
-                    parselimit-=1
-                    curmin=Math.floor(parselimit/60)
-                    cursec=parselimit%60
-                    if (curmin!=0)
-                    curtime=curmin+" minutes and "+cursec+" seconds left until page refresh!"
-                    else
-                    curtime=cursec+" seconds left until page refresh!"
-                    window.status=curtime
-                    setTimeout("beginrefresh()",1000)
-                }
-            }
+{% block page-css %}
+{% endblock %}
 
-            window.onload=beginrefresh
-            //-->
-        </script>
-    </head>
-
-    <body>
+{% block content %}
     {% if measurements %}
-        <table id="minimaltable" summary="Live measurements" border="1">
-            <th scope="col">Location</th>
-            <th scope="col">Node</th>
-            <th scope="col">Lot status</th>
-            <th scope="col">Raw reading</th>
-            <th scope="col">Battery %</th>
-            <th scope="col">Sequence no.</th>
-            <th scope="col">Created</th>
-            {% for measurement in measurements %}
-            <tr>
-                <td>{{ measurement.node.cluster }}</td>
-                <td>{{ measurement.node }}</td>
-                <td>{{ measurement.isTaken }}</td>
-                <td>{{ measurement.raw_reading }}</td>
-                <td>{{ measurement.batt }}</td>
-                <td>{{ measurement.seq }}</td>
-                <td>{{ measurement.created }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+            <div id="live_data">
+
+            <table id="minimaltable" summary="Live measurements" border="1">
+                <th scope="col">Location</th>
+                <th scope="col">Node</th>
+                <th scope="col">Lot status</th>
+                <th scope="col">Raw reading</th>
+                <th scope="col">Battery %</th>
+                <th scope="col">Sequence no.</th>
+                <th scope="col">Created</th>
+                {% for measurement in measurements %}
+                <tr>
+                    <td>{{ measurement.node.cluster }}</td>
+                    <td>{{ measurement.node }}</td>
+                    <td>{{ measurement.isTaken }}</td>
+                    <td>{{ measurement.raw_reading }}</td>
+                    <td>{{ measurement.batt }}</td>
+                    <td>{{ measurement.seq }}</td>
+                    <td>{{ measurement.created }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
     {% else %}
         <p>No measurements were found.</p>
     {% endif %}
-    </body>
-</html>
+{% endblock %}

@@ -1,0 +1,19 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <!-- Page specific js/css start -->
+        {% block page-scripts %}{% endblock %}
+        {% block page-css %}{% endblock %}
+        <!-- Page specific js/css end -->
+        <!-- Site-wide js/css start -->
+        <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <!-- Site-wide js/css end -->
+    </head>
+    <body>
+        {% block content %}{% endblock %}
+        {% block footer %}
+        {% endblock %}
+    </body>
+</html>

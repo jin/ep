@@ -78,9 +78,9 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'ep.urls'
 
 TEMPLATE_DIRS = (
-        "/home/jin/Codes/Django/ep/templates/",
-        "/home/jin/Codes/Django/ep/carparks/templates/",
-        "/home/jin/Codes/Django/ep/api/templates/",
+        "./templates/",
+        "./carparks/templates/",
+        "./api/templates/",
 )
 
 INSTALLED_APPS = (
